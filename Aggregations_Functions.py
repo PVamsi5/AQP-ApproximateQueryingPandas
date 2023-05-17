@@ -2,6 +2,16 @@ import pandas as pd
 import numpy as np
 import time
 
+# Sampling function
+
+def sampling_fn(data, num):
+    size = len(data.index)
+    result = []
+    for i in range(num):
+        index = int((size-1) * np.random.random())
+        result.append(data[index])
+    return result
+
 # Online aggregation based AQP functions
 
 def aqp_mean(data, col, time):
