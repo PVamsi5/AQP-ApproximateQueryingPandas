@@ -172,7 +172,7 @@ def aqp_groupby_strat_sum(group_data, data, col, time) :
         result[col].append(key)
     return pd.DataFrame(result)
 
- def aqp_groupby_strat_count(group_data, data, col, time) :
+def aqp_groupby_strat_count(group_data, data, col, time) :
     if isinstance(group_data, pd.core.groupby.generic.DataFrameGroupBy) == 0:
         raise Exception("Expecting a Pandas DataFrameGroupBy - group_data")
     if isinstance(data, pd.DataFrame) == 0:
