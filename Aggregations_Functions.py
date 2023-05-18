@@ -2,6 +2,16 @@ import pandas as pd
 import numpy as np
 import time
 
+# Sampling function
+
+def sampling_fn(data, num):
+    size = len(data.index)
+    result = []
+    for i in range(num):
+        index = int((size-1) * np.random.random())
+        result.append(data[index])
+    return result
+
 # Online aggregation based AQP functions
 
 def aqp_mean(data, col, time):
@@ -191,7 +201,7 @@ def aqp_agg_error(data, col, agg, error):
     sample_size = 10
     start = time.time()
     for i in range(10):
-        sample = func4(data,col,1000)
+        sample = sampling_fn(new_data,1000)
         new_data2.append(agg(sample))
     result = sum(new_data2)/10
     curr_error = 2.262 * (np.std(new_data2)/np.sqrt(10))
@@ -217,7 +227,7 @@ def aqp_min_error(data, col, error):
     sample_size = 10
     start = time.time()
     for i in range(10):
-        sample = func4(data,col,1000)
+        sample = sampling_fn(new_data,1000)
         new_data2.append(min(sample))
     result = sum(new_data2)/10
     curr_error = 2.262 * (np.std(new_data2)/np.sqrt(10))
@@ -243,7 +253,7 @@ def aqp_max_error(data, col, error):
     sample_size = 10
     start = time.time()
     for i in range(10):
-        sample = func4(data,col,1000)
+        sample = sampling_fn(new_data,1000)
         new_data2.append(max(sample))
     result = sum(new_data2)/10
     curr_error = 2.262 * (np.std(new_data2)/np.sqrt(10))
@@ -292,7 +302,7 @@ def aqp_std_error(data, col, error):
     sample_size = 10
     start = time.time()
     for i in range(10):
-        sample = func4(data,col,1000)
+        sample = sampling_fn(new_data,1000)
         new_data2.append(np.std(sample))
     result = sum(new_data2)/10
     curr_error = 2.262 * (np.std(new_data2)/np.sqrt(10))
@@ -318,7 +328,7 @@ def aqp_var_error(data, col, error):
     sample_size = 10
     start = time.time()
     for i in range(10):
-        sample = func4(data,col,1000)
+        sample = sampling_fn(new_data,1000)
         new_data2.append(np.var(sample))
     result = sum(new_data2)/10
     curr_error = 2.262 * (np.std(new_data2)/np.sqrt(10))
